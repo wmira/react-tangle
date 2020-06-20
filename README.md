@@ -11,6 +11,10 @@ A simple react app state management library.
 Use it to make it quickly provide shared state for your React projects and ideal for rapid application prototyping.
 Reduces most boilerplates and just share state between components directly.
 
+## Example
+
+1. [TodoMvC](https://codesandbox.io/s/sad-bash-sykqy)
+
 ## Basic
 
 ```
