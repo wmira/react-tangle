@@ -5,8 +5,7 @@ import useDoubleClick from "./useDoubleClick";
 import useOnEnter from "./useOnEnter";
 import { useTangledState } from "react-tangle";
 
-const copyAndFindTodo = (todos, id) => {
-  //const copy = [...todos]
+const copyAndFindTodo = (todos, id) => {  
   const idx = todos.findIndex(t => t.id === id)
   const todo = todos[idx]
   if (todo) {
@@ -27,8 +26,7 @@ const updateLabel = (todos, id, label) => {
 }
 
 const deleteTodo = (todos, id) => {
-  const { todos: todosCopy, idx, todo: toUpdate } = copyAndFindTodo(todos, id)
-  console.log("deleting ", todosCopy, idx)
+  const { todos: todosCopy, idx, todo: toUpdate } = copyAndFindTodo(todos, id)  
   if (toUpdate) {    
     todosCopy.splice(idx,1)
     return todosCopy
@@ -37,7 +35,7 @@ const deleteTodo = (todos, id) => {
 }
 
 export default function TodoItem({ todo }) {
-  // const [, { deleteTodo }] = useTodos(() => null);
+    
   const [todos, setTodos] = useTangledState("todos")
 
   const [editing, setEditing] = useState(false);
@@ -46,15 +44,16 @@ export default function TodoItem({ todo }) {
     setTodos(deleteTodo(todos, todo.id))
   }
   const onDone = () => {
-    const newTodos = [ ...todos ]
-    const idx = newTodos.findIndex(c => todo.id === c.id)
-    const todoToUpdate = newTodos[idx]
-    todoToUpdate.done = !todoToUpdate.done
-    setTodos(newTodos)    
+    const { todos: todosCopy, idx, todo: toUpdate } = copyAndFindTodo(todos, todo.id)
+    if (toUpdate) {
+      const copyOfTodo = { ...toUpdate }
+      copyOfTodo.done = !copyOfTodo.done
+      todosCopy[idx] = copyOfTodo      
+      setTodos(todosCopy)
+    }    
   }
   const onChange = event => {    
-    setTodos(updateLabel(todos, todo.id, event.target.value))    
-    //setLabel(todo.id, event.target.value)
+    setTodos(updateLabel(todos, todo.id, event.target.value))        
   }
 
 

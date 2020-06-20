@@ -23,8 +23,7 @@ export default function TodoList() {
     () => {                 
       setTodos(() => {
         return JSON.parse(localStorage.getItem("todos") || "[]")
-      }) 
-      
+      })       
     },
     []
   )
