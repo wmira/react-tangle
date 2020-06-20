@@ -1,6 +1,6 @@
 # react-tangle
 
-A simple react app state management library
+A simple react app state management library. Experimental stage.
 
 ## Basic
 

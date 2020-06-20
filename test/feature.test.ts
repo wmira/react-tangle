@@ -1,4 +1,4 @@
-import { createContext } from './tangle'
+import { createContext } from '../src/tangle'
 
 interface TestObj {
   test: { key: string, count: number }
