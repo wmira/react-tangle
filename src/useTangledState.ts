@@ -2,35 +2,41 @@ import * as React from 'react'
 import { useTangledContext } from "./useTangledContext";
 import { Cb, KeyOf } from './types';
 
-type KeySetter<S, K extends keyof S> = (nextVal: S[K]) => void
+type KeyFnSetter<S> = (currentVal: S) => S
+type KeySetter<S, K extends keyof S> = (nextVal: S[K] | KeyFnSetter<S[K]>) => void
 
-export function useTangledState<S>(key: KeyOf<S>, defaultV: S[KeyOf<S>]): [ Readonly<S[KeyOf<S>]>, KeySetter<S, KeyOf<S>>] {
+export function useTangledState<S, K extends keyof S>(key: K, defaultV: S[KeyOf<S>]): [ Readonly<S[KeyOf<S>]>, KeySetter<S, K>] {
 
   const tangledContext = useTangledContext<S>();
   const [localState, setLocalState] = React.useState<Readonly<S[KeyOf<S>]>>(tangledContext.stateOf(key) || defaultV)
 
-  const cbRef = React.useRef<Cb<S[KeyOf<S>]> | undefined>(undefined)
+  const cbRef = React.useRef<Cb<S[K]>>()
 
   React.useEffect(
     () => {
-      cbRef.current = (newV, _oldV, source: unknown) => {
+      cbRef.current = (newV, _oldV, source: unknown) => {        
         if (source !== cbRef.current) {
           setLocalState(newV as any)
         }
       }
+      
       return tangledContext.subscribe(key, cbRef.current)
+      
     },
     []
-
   )
-  React.useEffect(
-    () => {
-      if (localState !== tangledContext.stateOf(key)) {
-        tangledContext.update(key, localState as S[KeyOf<S>], cbRef.current!)
+  const setState = React.useCallback(
+    (nextV: S[K] | KeyFnSetter<S[K]>) => {
+      let toSet = nextV
+      if (typeof nextV === 'function') {
+        toSet = (nextV as any)(tangledContext.stateOf(key))
       }
+      setLocalState(toSet as any)
+      tangledContext.update<K>(key, toSet as any, cbRef.current)      
     },
-    [localState]
+    [key, cbRef.current, setLocalState]
   )
-  return [ localState, setLocalState ]
+  
+  return [ localState, setState ]
 }
 

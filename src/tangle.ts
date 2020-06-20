@@ -1,4 +1,4 @@
-import type { ITangleContext, KeyOf, Cb } from "./types";
+import type { ITangleContext, Cb, KeyOf } from "./types";
 
 export const createContext = <S>(initial?: S): ITangleContext<S> => {
 
@@ -6,10 +6,10 @@ export const createContext = <S>(initial?: S): ITangleContext<S> => {
   const callbacks: Record<string, Cb<S[KeyOf<S>]>[]> = {}
 
   return {
-    stateOf(key: KeyOf<S>) {
+    stateOf<K extends keyof S>(key: K) {
       return root[key]
     },
-    update<C = unknown>(key: KeyOf<S>, newV: S[KeyOf<S>], caller?: C) {
+    update<K extends keyof S, C = unknown>(key: K, newV: S[K], caller?: C) {
       const oldV = root[key]
       root[key] = newV
       setTimeout(
@@ -23,11 +23,12 @@ export const createContext = <S>(initial?: S): ITangleContext<S> => {
         0
       )
     },
-    subscribe(key: KeyOf<S>, cb: Cb<S[KeyOf<S>]>) {
-      let cbs = callbacks[key as string]
+    subscribe<K extends keyof S>(key: K, cb: Cb<S[K]>) {
+      let cbs: Cb<S[K]>[] = callbacks[key as string]
       if (!cbs) {
-        cbs = []
-        callbacks[key as string] = cbs
+        cbs = [];
+        // fix this typing
+        (callbacks as any)[key as string] = cbs as Cb<S[K]>[]
       }
       cbs.push(cb)
       return () => {

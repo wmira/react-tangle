@@ -6,11 +6,10 @@
   "scripts": {
     "start": "webpack-dev-server --mode development src/index.tsx  ",
     "test": "jest",
+    "dist": "rm -rf dist; tsc; cp package.json README.md dist",
     "compile": "tsc"
   },
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "devDependencies": {
     "@testing-library/jest-dom": "^5.10.1",
     "@testing-library/react": "^10.3.0",
