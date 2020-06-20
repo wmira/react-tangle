@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { useTangledContext } from "./useTangledContext";
-import { Cb, KeyOf } from './types';
+import { Cb } from './types';
 
 type KeyFnSetter<S> = (currentVal: S) => S
 type KeySetter<S, K extends keyof S> = (nextVal: S[K] | KeyFnSetter<S[K]>) => void
 
-export function useTangledState<S, K extends keyof S>(key: K, defaultV: S[KeyOf<S>]): [ Readonly<S[KeyOf<S>]>, KeySetter<S, K>] {
+export function useTangledState<S, K extends keyof S>(key: K, defaultV: S[K]): [ Readonly<S[K]>, KeySetter<S, K>] {
 
   const tangledContext = useTangledContext<S>();
-  const [localState, setLocalState] = React.useState<Readonly<S[KeyOf<S>]>>(tangledContext.stateOf(key) || defaultV)
+  const [localState, setLocalState] = React.useState<Readonly<S[K]>>(tangledContext.stateOf<K>(key) || defaultV)
 
   const cbRef = React.useRef<Cb<S[K]>>()
 

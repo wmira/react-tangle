@@ -7,7 +7,7 @@ export type Cb<S = unknown> = (newV: S, oldV: S, source?: unknown) => void
 export type Unsubscribe = () => void
 
 export interface ITangleContext<S> {
-  stateOf(key: KeyOf<S>): S[KeyOf<S>]
+  stateOf<K extends keyof S>(key: K): S[K]
   subscribe<K extends keyof S>(key: KeyOf<S>, cb: Cb<S[K]> ): Unsubscribe
   /**
    * Update the given
