@@ -1,10 +1,14 @@
 # react-tangle
 
+[![codecov](https://codecov.io/gh/wmira/react-tangle/branch/master/graph/badge.svg)](https://codecov.io/gh/wmira/react-tangle)
+[![npm version](https://badge.fury.io/js/react-tangle.svg)](https://badge.fury.io/js/react-tangle)
+
+
 A simple react app state management library. 
 
 ## Motivation
 
-Use it to make it quickly provide shared state for your React projects and ideal on quick application prototyping.
+Use it to make it quickly provide shared state for your React projects and ideal for rapid application prototyping.
 Reduces most boilerplates and just share state between components directly.
 
 ## Basic
