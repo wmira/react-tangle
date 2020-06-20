@@ -5,7 +5,7 @@
   "author": "Warren Mira",
   "scripts": {
     "start": "webpack-dev-server --mode development src/index.tsx  ",
-    "test": "jest",
+    "test": "jest test",
     "dist": "rm -rf dist; tsc; cp package.json README.md LICENSE dist",
     "compile": "tsc"
   },
@@ -20,7 +20,7 @@
   "keywords": [
     "react",
     "react state management",
-    "state management"    
+    "state management"
   ],
   "dependencies": {},
   "devDependencies": {
