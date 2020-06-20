@@ -1,4 +1,4 @@
-import type { ITangleContext, Cb, KeyOf } from "./types";
+import { ITangleContext, Cb, KeyOf } from "./types";
 
 export const createContext = <S>(initial?: S): ITangleContext<S> => {
 

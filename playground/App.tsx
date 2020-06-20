@@ -13,7 +13,7 @@ interface IAppState {
 }
 
 export const Todos = () => {
-  const [todos] = useTangledState<IAppState>('todos', [])
+  const [todos] = useTangledState<IAppState, 'todos'>('todos', [])
 
   return (
     <div>
@@ -25,7 +25,7 @@ export const Todos = () => {
 
 export const AddTodo = () => {
 
-  const [todos, setTodos] = useTangledState<IAppState>('todos', [])
+  const [todos, setTodos] = useTangledState<IAppState, 'todos'>('todos', [])
   const inputRef = React.useRef<any>()
 
   const addTodo = () => {

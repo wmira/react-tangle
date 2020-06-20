@@ -8,7 +8,7 @@ export type Unsubscribe = () => void
 
 export interface ITangleContext<S> {
   stateOf<K extends keyof S>(key: K): S[K]
-  subscribe<K extends keyof S>(key: KeyOf<S>, cb: Cb<S[K]> ): Unsubscribe
+  subscribe<K extends keyof S>(key: K, cb: Cb<S[K]> ): Unsubscribe
   /**
    * Update the given
    * @param key

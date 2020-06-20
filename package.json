@@ -1,12 +1,12 @@
 {
   "name": "react-tangle",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "A Simple State Management Library in React",
   "author": "Warren Mira",
   "scripts": {
     "start": "webpack-dev-server --mode development src/index.tsx  ",
     "test": "jest",
-    "dist": "rm -rf dist; tsc; cp package.json README.md dist",
+    "dist": "rm -rf dist; tsc; cp package.json README.md LICENSE dist",
     "compile": "tsc"
   },
   "repository": {

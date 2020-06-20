@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { ITangleContext } from './types'
+import { ITangleContext } from './types'
 import { createContext } from './tangle'
 
 export const TangleContext = React.createContext<ITangleContext<any>>(null as any)
