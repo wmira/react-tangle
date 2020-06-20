@@ -41,8 +41,7 @@ export const AddTodo = () => {
   )
 }
 
-function App({}: AppProps) {
-  console.log("APP")
+function App({}: AppProps) {  
   return (
     <TangleProvider initial={{ todos: [{ name: 'Todo 1'}] }}>
       <Todos />
