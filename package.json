@@ -1,6 +1,6 @@
 {
   "name": "react-tangle",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "A Simple State Management Library in React",
   "author": "Warren Mira",
   "scripts": {
@@ -9,6 +9,19 @@
     "dist": "rm -rf dist; tsc; cp package.json README.md dist",
     "compile": "tsc"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wmira/react-tangle"
+  },
+  "bugs": {
+    "url": "https://github.com/wmira/react-tangle/issues"
+  },
+  "homepage": "https://github.com/wmira/react-tangle",
+  "keywords": [
+    "react",
+    "react state management",
+    "state management"    
+  ],
   "dependencies": {},
   "devDependencies": {
     "@testing-library/jest-dom": "^5.10.1",
